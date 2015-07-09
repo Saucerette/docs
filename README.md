@@ -1,2 +1,2 @@
 # docs
-Documentation and discussion
+Documentation and discussion - look in the wiki
