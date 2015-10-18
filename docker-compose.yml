@@ -1,0 +1,33 @@
+   mongodb:
+     image: mongo
+     ports:
+       - "27017"
+   
+   rabbitmq:
+     image: rabbitmq 
+   
+   client:
+     build: client/
+     links:
+       - rabbitmq
+   
+   contact:
+     build: contact/
+     ports:
+       - "80"
+   
+   eventstore:
+     build: event-store/
+     ports:
+       - "80"
+     links:
+       - rabbitmq
+       - mongodb
+   
+   glue:
+     image: timjr/glue
+     ports:
+         - "49400:80"
+     links:
+       - eventstore
+       - contact
